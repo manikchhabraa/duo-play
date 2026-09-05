@@ -1,0 +1,54 @@
+src/games3d/DiceMesh.tsx
+  s_b4a99c61314bb7::t_ceac5982e0dfbf 67
+  s_b4a99c61314bb7::t_d71a7220d58fe9 1,3-4,6-13,16-50,54-55,58-62,64-66,68-74,77-81,84-87,91-93,95-98
+src/games3d/SnakesBoard.tsx
+  s_b4a99c61314bb7::t_e324afe4837323 8-9
+  s_b4a99c61314bb7::t_0a1c71a3493765 1-7,10-125,127-130,132-145
+  s_b4a99c61314bb7::t_fe23286dea09ec 126,131
+src/games/Snakes.tsx
+  s_b4a99c61314bb7::t_1a2e95fa84e951 91-92
+  s_b4a99c61314bb7::t_928456ec199d09 1-2,6-7,31,67,75,77-78,80-85,88-90,93,96-108
+  s_b4a99c61314bb7::t_5013d1be92ba0b 33-34
+  s_b4a99c61314bb7::t_8ad58b69e8ab0c 35
+  s_b4a99c61314bb7::t_390431492fe19a 74
+src/index.css
+  s_b4a99c61314bb7::t_6b6c22fb7c406a 854-855,857-884
+src/games3d/BoardCanvas.tsx
+  s_b4a99c61314bb7::t_c3bcb011b8c5ad 3,10,19,33-36,38,40,42,45,47-74,83-84,98,104,111,114-116,118,120,126
+  s_b4a99c61314bb7::t_c96373463f01eb 18
+  s_b4a99c61314bb7::t_a31679a0a4eaba 6,14-15,20-28,37,39,41
+  s_b4a99c61314bb7::t_e6ed517b69044f 1-2,4,11-13,29-32,43-44,46,76-81,85-89,102-103,107,109-110,112-113,117,119,121-125,127
+  s_b4a99c61314bb7::t_550e6323204cff 75
+  s_b4a99c61314bb7::t_cb6f79ffbe7140 90-97
+  s_b4a99c61314bb7::t_b699b6f7c337e8 108
+src/games3d/LudoBoard.tsx
+  s_b4a99c61314bb7::t_920073da9923e0 2-5,8,11,14-15,20,23-25
+  s_b4a99c61314bb7::t_35cf8a21156db1 6-7
+  s_b4a99c61314bb7::t_242fdce88df5b3 16,21
+src/games3d/textures.ts
+  s_b4a99c61314bb7::t_bb79339d8a9f51 1-268
+src/games/Ludo.tsx
+  s_b4a99c61314bb7::t_e52842d4412920 40-43
+  s_b4a99c61314bb7::t_91c323d07fa2f0 6-7,78,86,95-102,114-126,138
+  s_b4a99c61314bb7::t_390431492fe19a 85
+  s_b4a99c61314bb7::t_c607c38c93eb67 109-110
+src/games3d/Pieces.tsx
+  s_b4a99c61314bb7::t_7c0089f9f9aa93 1-70,85-97
+  s_b4a99c61314bb7::t_228b4d85a728c9 71-84
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.8",
+  "base_commit_sha": "400152334af053bd69547d021f5875e3cf5d87cd",
+  "prompts": {},
+  "sessions": {
+    "s_b4a99c61314bb7": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "3a3fb445-a08a-4272-b5d7-62d69521db3b",
+        "model": "claude-opus-5"
+      },
+      "human_author": "cman10 <Manik.Chhabra@go-mmt.com>"
+    }
+  }
+}
