@@ -1,4 +1,5 @@
 export const GAMES = [
+  { id: "uno", name: "Uno", blurb: "Match color or number. First to empty wins.", mark: "▣" },
   { id: "tictactoe", name: "Tic-Tac-Toe", blurb: "Three in a row. Instant duel.", mark: "＋" },
   { id: "connect4", name: "Connect Four", blurb: "Drop discs. Line up four.", mark: "◉" },
   { id: "battleship", name: "Battleship", blurb: "Hide your fleet. Hunt theirs.", mark: "◈" },

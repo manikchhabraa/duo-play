@@ -656,3 +656,193 @@ input {
     position: absolute;
   }
 }
+
+.uno-foe {
+  display: grid;
+  gap: 8px;
+  justify-items: center;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.uno-backs {
+  display: flex;
+  height: 44px;
+  align-items: center;
+}
+
+.uno-back {
+  width: 32px;
+  height: 44px;
+  margin-left: -14px;
+  border-radius: 6px;
+  background:
+    linear-gradient(135deg, #1a1d28, #0c0e16);
+  border: 1px solid #c8f542;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.35);
+}
+
+.uno-backs .uno-back:first-child {
+  margin-left: 0;
+}
+
+.uno-log {
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+  min-height: 1.4em;
+}
+
+.uno-table {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  align-items: center;
+  margin: 8px 0 14px;
+}
+
+.uno-pile {
+  background: none;
+  border: 0;
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.uno-pile .face {
+  width: 72px;
+  height: 104px;
+  margin: 0;
+  border-radius: 10px;
+}
+
+.uno-discard {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+}
+
+.uno-color {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.uno-call {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  color: var(--lime);
+  margin: 0 0 8px;
+}
+
+.uno-colors {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin: 8px 0 12px;
+}
+
+.uno-swatch,
+.uno-card {
+  border: 0;
+}
+
+.uno-swatch {
+  min-height: 48px;
+  border-radius: 14px;
+  font-weight: 700;
+  text-transform: capitalize;
+  color: #fff;
+}
+
+.uno-hand {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 8px 2px 18px;
+  margin: 0 -4px;
+}
+
+.uno-card-btn {
+  background: none;
+  border: 0;
+  padding: 0;
+  flex: 0 0 76px;
+}
+
+.uno-card-btn:disabled {
+  opacity: 0.55;
+}
+
+.uno-card-btn.go {
+  opacity: 1;
+  transform: translateY(-8px);
+}
+
+.uno-card {
+  width: 76px;
+  height: 110px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  position: relative;
+  color: #fff;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.35);
+  border: 3px solid #f4f5f7;
+}
+
+.uno-card small {
+  position: absolute;
+  top: 6px;
+  left: 7px;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.uno-card small.flip {
+  top: auto;
+  left: auto;
+  right: 7px;
+  bottom: 6px;
+  transform: rotate(180deg);
+}
+
+.uno-card strong {
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.uno-card.red,
+.uno-swatch.red,
+.uno-color.red {
+  background: #e23d3d;
+}
+.uno-card.yellow,
+.uno-swatch.yellow,
+.uno-color.yellow {
+  background: #f0c41a;
+  color: #111;
+}
+.uno-card.green,
+.uno-swatch.green,
+.uno-color.green {
+  background: #1f9d58;
+}
+.uno-card.blue,
+.uno-swatch.blue,
+.uno-color.blue {
+  background: #2f6fe0;
+}
+.uno-card.wild {
+  background:
+    conic-gradient(#e23d3d 0 90deg, #f0c41a 90deg 180deg, #1f9d58 180deg 270deg, #2f6fe0 270deg);
+  color: #fff;
+  text-shadow: 0 1px 2px #000;
+}
+

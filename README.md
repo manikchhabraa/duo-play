@@ -8,7 +8,7 @@ Create a room → send a 6-character code, link, or QR → both play live. The N
 
 - Two people play on **separate phones/browsers**, not pass-and-play.
 - **Create / join room** with a short code, share link (`/?room=ABC123`), or QR.
-- **Six games**: Tic-Tac-Toe, Connect Four, Battleship, Checkers, Dots & Boxes, RPS Duel (first to 3).
+- **Seven games**: Uno, Tic-Tac-Toe, Connect Four, Battleship, Checkers, Dots & Boxes, RPS Duel (first to 3).
 - Stay **online** for the match: Socket.io presence, pause if the other phone drops, resume on reconnect.
 - **Installable PWA** (Add to Home Screen on iOS; install prompt on Android). Portrait, full-screen, notch-safe.
 - **Easy host**: one Node process serves the built PWA **and** the realtime server.
@@ -125,7 +125,7 @@ Server → client
 
 HTTP: `GET /health` → `{ ok: true }` for hosts.
 
-Game actions (validated server-side): Tic-Tac-Toe `{ cell }`, Connect Four `{ col }`, Battleship `{ type: shuffle\|ready\|fire, r?, c? }`, Checkers `{ from, to }`, Dots `{ kind: h\|v, r, c }`, RPS `{ choice }`.
+Game actions (validated server-side): Uno `{ type: play\|draw\|playDrawn\|keepDrawn\|chooseColor\|challenge\|accept }`, Tic-Tac-Toe `{ cell }`, Connect Four `{ col }`, Battleship `{ type: shuffle\|ready\|fire, r?, c? }`, Checkers `{ from, to }`, Dots `{ kind: h\|v, r, c }`, RPS `{ choice }`.
 
 ## Run locally
 

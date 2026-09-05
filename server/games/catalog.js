@@ -1,4 +1,5 @@
 export const GAME_IDS = [
+  "uno",
   "tictactoe",
   "connect4",
   "battleship",
@@ -8,6 +9,12 @@ export const GAME_IDS = [
 ];
 
 export const GAMES = [
+  {
+    id: "uno",
+    name: "Uno",
+    blurb: "Match color or number. First to empty wins.",
+    mark: "▣",
+  },
   {
     id: "tictactoe",
     name: "Tic-Tac-Toe",

@@ -9,6 +9,7 @@ import Battleship from "../games/Battleship";
 import Checkers from "../games/Checkers";
 import Dots from "../games/Dots";
 import Rps from "../games/Rps";
+import Uno from "../games/Uno";
 import { joinUrl } from "../util";
 
 type Props = {
@@ -138,9 +139,8 @@ export default function Room({
                 ? resultLine(sync)
                 : !bothLive
                   ? "Paused"
-                  : yourTurn
-                    ? "Your move"
-                    : "Their move"}
+                  : (sync.game as { prompt?: string }).prompt ||
+                    (yourTurn ? "Your move" : "Their move")}
             </span>
           </div>
           <GameView sync={sync} onAction={onAction} />
@@ -205,6 +205,8 @@ function GameView({
       );
     case "rps":
       return <Rps game={g} you={you} onPick={(choice) => onAction({ choice })} />;
+    case "uno":
+      return <Uno game={g} you={you} onAction={onAction} />;
     default:
       return null;
   }
