@@ -845,4 +845,25 @@ input {
   color: #fff;
   text-shadow: 0 1px 2px #000;
 }
+.board3d {
+  display: grid;
+  gap: 10px;
+}
+
+.board3d-stage {
+  height: min(52dvh, 420px);
+  border-radius: 18px;
+  overflow: hidden;
+  background: #0b1220;
+  touch-action: none;
+}
+
+.board3d-canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.board3d > .btn {
+  width: 100%;
+}
 

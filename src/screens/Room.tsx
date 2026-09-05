@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import QRCode from "qrcode";
 import type { Sync } from "../useSession";
 import { gameById, type GameId } from "../catalog";
@@ -11,6 +11,9 @@ import Dots from "../games/Dots";
 import Rps from "../games/Rps";
 import Uno from "../games/Uno";
 import { joinUrl } from "../util";
+
+const Ludo = lazy(() => import("../games/Ludo"));
+const Snakes = lazy(() => import("../games/Snakes"));
 
 type Props = {
   sync: Sync;
@@ -143,7 +146,9 @@ export default function Room({
                     (yourTurn ? "Your move" : "Their move")}
             </span>
           </div>
-          <GameView sync={sync} onAction={onAction} />
+          <Suspense fallback={<p className="hint">Loading board…</p>}>
+            <GameView sync={sync} onAction={onAction} />
+          </Suspense>
         </div>
       )}
 
@@ -207,6 +212,10 @@ function GameView({
       return <Rps game={g} you={you} onPick={(choice) => onAction({ choice })} />;
     case "uno":
       return <Uno game={g} you={you} onAction={onAction} />;
+    case "ludo":
+      return <Ludo game={g} you={you} onAction={onAction} />;
+    case "snakes":
+      return <Snakes game={g} you={you} onAction={onAction} />;
     default:
       return null;
   }

@@ -1,4 +1,6 @@
 export const GAMES = [
+  { id: "ludo", name: "Ludo", blurb: "Race four tokens home. Capture on the path.", mark: "♟" },
+  { id: "snakes", name: "Snakes & Ladders", blurb: "Climb ladders. Slide down snakes. First to 100.", mark: "🪜" },
   { id: "uno", name: "Uno", blurb: "Match color or number. First to empty wins.", mark: "▣" },
   { id: "tictactoe", name: "Tic-Tac-Toe", blurb: "Three in a row. Instant duel.", mark: "＋" },
   { id: "connect4", name: "Connect Four", blurb: "Drop discs. Line up four.", mark: "◉" },

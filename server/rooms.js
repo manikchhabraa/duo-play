@@ -6,9 +6,11 @@ import * as checkers from "./games/checkers.js";
 import * as dots from "./games/dots.js";
 import * as rps from "./games/rps.js";
 import * as uno from "./games/uno.js";
+import * as ludo from "./games/ludo.js";
+import * as snakes from "./games/snakes.js";
 import { GAME_IDS } from "./games/catalog.js";
 
-const ENGINES = { tictactoe, connect4, battleship, checkers, dots, rps, uno };
+const ENGINES = { tictactoe, connect4, battleship, checkers, dots, rps, uno, ludo, snakes };
 const ALPH = "23456789ABCDEFGHJKLMNPQRSTUVWXYZ";
 const ROOM_TTL_MS = 45 * 60 * 1000;
 const EMPTY_TTL_MS = 12 * 60 * 1000;

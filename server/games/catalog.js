@@ -1,4 +1,6 @@
 export const GAME_IDS = [
+  "ludo",
+  "snakes",
   "uno",
   "tictactoe",
   "connect4",
@@ -9,6 +11,18 @@ export const GAME_IDS = [
 ];
 
 export const GAMES = [
+  {
+    id: "ludo",
+    name: "Ludo",
+    blurb: "Race four tokens home. Capture on the path.",
+    mark: "♟",
+  },
+  {
+    id: "snakes",
+    name: "Snakes & Ladders",
+    blurb: "Climb ladders. Slide down snakes. First to 100.",
+    mark: "🪜",
+  },
   {
     id: "uno",
     name: "Uno",
