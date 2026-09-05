@@ -1,0 +1,104 @@
+src/games/TicTacToe.tsx
+  s_b4a99c61314bb7::t_3d840874f26ae9 1-31
+src/screens/Home.tsx
+  s_b4a99c61314bb7::t_a1135ae249e2ca 1-102
+Dockerfile
+  s_b4a99c61314bb7::t_2520df6deb2272 1-16
+src/socket.ts
+  s_b4a99c61314bb7::t_1fecf877780681 1-15
+package.json
+  s_b4a99c61314bb7::t_091877384550a9 14
+  s_b4a99c61314bb7::t_447d789c7ad882 8
+  s_b4a99c61314bb7::t_dcd7644f3571b2 1-7,9-13,15-34
+src/components/GameGrid.tsx
+  s_b4a99c61314bb7::t_4ed7abc4009b86 1-25
+src/screens/Room.tsx
+  s_b4a99c61314bb7::t_c985045365480b 1-211
+server/games/dots.js
+  s_b4a99c61314bb7::t_3b3613478a65ab 1-82
+Procfile
+  s_b4a99c61314bb7::t_1e6207e9756171 1
+vite.config.ts
+  s_b4a99c61314bb7::t_3b5a48b138e110 1-54
+index.html
+  s_b4a99c61314bb7::t_998989374bcf46 1-32
+src/index.css
+  s_b4a99c61314bb7::t_d5e6553160955b 1-658
+fly.toml
+  s_b4a99c61314bb7::t_7ac6ad47c9f880 1-16
+src/games/Battleship.tsx
+  s_b4a99c61314bb7::t_ece97b0d3a8083 99-104,109-113
+  s_b4a99c61314bb7::t_cb03db9dbc9e72 1-98,105-108,114-121
+src/util.ts
+  s_b4a99c61314bb7::t_8acc17e27e1759 1-25
+.dockerignore
+  s_b4a99c61314bb7::t_a510efed6903f7 1-5
+.nvmrc
+  s_b4a99c61314bb7::t_1eceea6cd170f0 1
+src/games/ConnectFour.tsx
+  s_b4a99c61314bb7::t_c00e06e634482e 1-42
+server/rooms.js
+  s_b4a99c61314bb7::t_5aa3baabd8cdbd 1-321
+server/index.js
+  s_b4a99c61314bb7::t_01773174fb3031 1-41
+src/catalog.ts
+  s_b4a99c61314bb7::t_17022996cd5420 1-14
+src/App.tsx
+  s_b4a99c61314bb7::t_aa19ed2b7edae6 1
+  s_b4a99c61314bb7::t_be1024c154e8e7 2-7,11-36
+  s_b4a99c61314bb7::t_a01d519175cde6 8-10
+README.md
+  s_b4a99c61314bb7::t_c49fe4d2d05ca1 132
+  s_b4a99c61314bb7::t_4a50bff7f84af2 1-131,133-199
+scripts/make-icons.mjs
+  s_b4a99c61314bb7::t_b260a8611e0601 1-100
+src/games/Rps.tsx
+  s_b4a99c61314bb7::t_1f69d78adb0679 1-90
+public/favicon.svg
+  s_b4a99c61314bb7::t_7c3ca2d6435cf9 1-5
+.gitignore
+  s_b4a99c61314bb7::t_59854545b44c62 1-7
+tsconfig.json
+  s_b4a99c61314bb7::t_65e5363c5040f8 1-20
+src/games/Checkers.tsx
+  s_b4a99c61314bb7::t_d44aa8ed1ec4cb 1-72
+render.yaml
+  s_b4a99c61314bb7::t_fb7e16c9d0744a 1-11
+src/games/Dots.tsx
+  s_b4a99c61314bb7::t_61f36c6babb93d 1-77
+server/games/checkers.js
+  s_b4a99c61314bb7::t_1fb64e95418d35 1-130
+server/games/tictactoe.js
+  s_b4a99c61314bb7::t_bd91799a68cdff 1-50
+server/games/catalog.js
+  s_b4a99c61314bb7::t_d76b5fa7dec661 1-47
+src/vite-env.d.ts
+  s_b4a99c61314bb7::t_29f26d93e2dcb4 1-4
+src/main.tsx
+  s_b4a99c61314bb7::t_85a2d4245d7c9f 1-13
+server/games/battleship.js
+  s_b4a99c61314bb7::t_185db7486676ab 1-178
+server/games/connect4.js
+  s_b4a99c61314bb7::t_2a6ee143b351ef 1-65
+src/useSession.ts
+  s_b4a99c61314bb7::t_e4462f403861c7 68-69
+  s_b4a99c61314bb7::t_00553438d764cf 1-67,70-154
+server/games/rps.js
+  s_b4a99c61314bb7::t_120de207243b9d 1-75
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.8",
+  "base_commit_sha": "4f0d1414b45add426d78e186bc4be0523401047b",
+  "prompts": {},
+  "sessions": {
+    "s_b4a99c61314bb7": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "3a3fb445-a08a-4272-b5d7-62d69521db3b",
+        "model": "grok-4.6"
+      },
+      "human_author": "cman10 <Manik.Chhabra@go-mmt.com>"
+    }
+  }
+}
