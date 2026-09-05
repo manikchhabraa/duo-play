@@ -1,0 +1,38 @@
+src/games/Uno.tsx
+  s_b4a99c61314bb7::t_8ca45e36a18d7d 1-204
+README.md
+  s_b4a99c61314bb7::t_cf6a62b0968883 11
+  s_b4a99c61314bb7::t_2ca2a6ac3febf9 128
+server/games/uno.js
+  s_b4a99c61314bb7::t_90decee985fe0c 353
+  s_b4a99c61314bb7::t_d9d2124fcab67a 1-314,326-352,354-370
+  s_b4a99c61314bb7::t_268275c7834862 315-325
+server/games/catalog.js
+  s_b4a99c61314bb7::t_c3c4de4b4c9b49 2,12-17
+src/catalog.ts
+  s_b4a99c61314bb7::t_f41d24f1071761 2
+server/rooms.js
+  s_b4a99c61314bb7::t_b2dfaeea9bab26 8,11
+src/index.css
+  s_b4a99c61314bb7::t_426896a6bfbb6b 659-848
+src/screens/Room.tsx
+  s_b4a99c61314bb7::t_64ae8f45255143 208-209
+  s_b4a99c61314bb7::t_1c826c4cc84ab7 142-143
+  s_b4a99c61314bb7::t_5b3d489fc9724a 12
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.8",
+  "base_commit_sha": "55007d2a1ed77d9e8f3ada8e8debcd08cc2991c9",
+  "prompts": {},
+  "sessions": {
+    "s_b4a99c61314bb7": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "3a3fb445-a08a-4272-b5d7-62d69521db3b",
+        "model": "grok-4.6"
+      },
+      "human_author": "cman10 <Manik.Chhabra@go-mmt.com>"
+    }
+  }
+}
