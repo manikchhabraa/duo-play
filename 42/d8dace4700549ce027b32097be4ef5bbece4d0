@@ -1,0 +1,72 @@
+server/games/ludo.js
+  s_b4a99c61314bb7::t_ae3deda24563d1 218
+  s_b4a99c61314bb7::t_8eb5e653ccf7ef 14
+  s_b4a99c61314bb7::t_5d252872d2da22 50
+  s_b4a99c61314bb7::t_bf16c6abda8e1b 1-13,15-49,51-96,98-105,107-205,207-217,219-228
+  s_b4a99c61314bb7::t_80af88137afff1 97
+  s_b4a99c61314bb7::t_c13efde75a7cdc 106
+  s_b4a99c61314bb7::t_caeb6424adf407 206
+README.md
+  s_b4a99c61314bb7::t_42c13f025223e7 11
+  s_b4a99c61314bb7::t_2f584b48e3c08c 128
+server/games/snakes.js
+  s_b4a99c61314bb7::t_43f1c8bcf708dc 93
+  s_b4a99c61314bb7::t_4c34479afba39c 34
+  s_b4a99c61314bb7::t_343cd8a4929799 1-22,24-33,35-92,94-101
+  s_b4a99c61314bb7::t_cdd4f632c2d1b0 23
+src/games/Ludo.tsx
+  s_b4a99c61314bb7::t_cef4c238794a90 1,3-120
+  s_b4a99c61314bb7::t_20ba8e1129f58d 2
+server/rooms.js
+  s_b4a99c61314bb7::t_4d3955db3a6dd0 9-10,13
+server/games/catalog.js
+  s_b4a99c61314bb7::t_17ee2b512d971f 2-3,14-25
+src/screens/Room.tsx
+  s_b4a99c61314bb7::t_c9e629c016b24f 149-151
+  s_b4a99c61314bb7::t_c303d20014c9d9 1
+  s_b4a99c61314bb7::t_9a6792bfc24c81 215-218
+  s_b4a99c61314bb7::t_606c78a2136574 15-17
+src/index.css
+  s_b4a99c61314bb7::t_897725db62beb7 848-867
+src/shared/snakesBoard.js
+  s_b4a99c61314bb7::t_881098ab267e30 1-52
+src/games3d/DiceMesh.tsx
+  s_b4a99c61314bb7::t_4f2e373e6afd04 1-105
+vite.config.ts
+  s_b4a99c61314bb7::t_cbec36867350d5 47-49
+src/games3d/LudoBoard.tsx
+  s_b4a99c61314bb7::t_19f3fdd981d23b 1,3-82
+  s_b4a99c61314bb7::t_4997e770569b53 2
+src/catalog.ts
+  s_b4a99c61314bb7::t_ffc7992841849c 2-3
+package.json
+  s_b4a99c61314bb7::t_80b0d5e9e1d2d7 18,24-25,30
+package-lock.json
+  s_b4a99c61314bb7::t_b957656d1de8e4 11,17-18,23,31,1624-1630,2161-2208,2708-2714,2804-2812,2820-2841,2849-2854,3092-3111,3220-3243,4165-4171,4666-4685,5154-5165,5339-5345,5900-5914,6758-6766,6815-6820,7125-7133,7681-7708
+tsconfig.json
+  s_b4a99c61314bb7::t_505a8fa2f6459d 15
+src/games3d/BoardCanvas.tsx
+  s_b4a99c61314bb7::t_c3f48801aa75a3 1-27
+src/shared/ludoBoard.js
+  s_b4a99c61314bb7::t_9411dc9f6a4419 1-58
+src/games/Snakes.tsx
+  s_b4a99c61314bb7::t_dcc63b6f7a0bb8 2
+  s_b4a99c61314bb7::t_3793b668f5c7c5 3-173
+  s_b4a99c61314bb7::t_180eaa00c39d3d 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.8",
+  "base_commit_sha": "42d8dace4700549ce027b32097be4ef5bbece4d0",
+  "prompts": {},
+  "sessions": {
+    "s_b4a99c61314bb7": {
+      "agent_id": {
+        "tool": "cursor",
+        "id": "3a3fb445-a08a-4272-b5d7-62d69521db3b",
+        "model": "grok-4.6"
+      },
+      "human_author": "cman10 <Manik.Chhabra@go-mmt.com>"
+    }
+  }
+}
