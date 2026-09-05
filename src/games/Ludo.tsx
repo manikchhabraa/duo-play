@@ -3,7 +3,8 @@ import { COLORS } from "../shared/ludoBoard.js";
 import { buzz } from "../util";
 import BoardCanvas from "../games3d/BoardCanvas";
 import DiceMesh from "../games3d/DiceMesh";
-import { LudoTiles, Pawn, cellWorld } from "../games3d/LudoBoard";
+import Pawn from "../games3d/Pieces";
+import { LUDO_FIT, LudoBoardMesh, cellWorld } from "../games3d/LudoBoard";
 
 type Token = {
   player: number;
@@ -35,6 +36,10 @@ type Props = {
   you: number;
   onAction: (action: Record<string, unknown>) => void;
 };
+
+/** The dice rests in the unused blue base and hops while rolling. */
+const DICE_SEAT: [number, number, number] = [-4.5, 0.76, 4.5];
+const DICE_HEADROOM: [number, number, number][] = [[-4.5, 2.1, 5.3]];
 
 export default function Ludo({ game, you, onAction }: Props) {
   const [spinning, setSpinning] = useState(false);
@@ -70,15 +75,15 @@ export default function Ludo({ game, you, onAction }: Props) {
         )
       );
       i += 1;
-    }, 110);
+    }, 130);
     return () => window.clearInterval(timer);
   }, [game.seq, game.anim, game.tokens]);
 
   return (
     <div className="board3d">
       <div className="board3d-stage">
-        <BoardCanvas camera={[0, 16, 14]}>
-          <LudoTiles />
+        <BoardCanvas fit={LUDO_FIT} tilt={1.06} keepInView={DICE_HEADROOM}>
+          <LudoBoardMesh />
           {display.map((t) => {
             const [x, y, z] = cellWorld(t.r, t.c);
             return (
@@ -87,21 +92,38 @@ export default function Ludo({ game, you, onAction }: Props) {
                 color={COLORS[t.player]}
                 position={[x, y, z]}
                 glow={t.canMove && yourTurn}
-                onClick={() => {
-                  if (!t.canMove || !yourTurn) return;
-                  buzz();
-                  onAction({ type: "move", token: t.token });
-                }}
+                onSelect={
+                  t.canMove && yourTurn
+                    ? () => {
+                        buzz();
+                        onAction({ type: "move", token: t.token });
+                      }
+                    : undefined
+                }
               />
             );
           })}
           <DiceMesh
             value={game.dice || 1}
             spinning={spinning}
-            position={[0, 1.35, 0]}
+            position={DICE_SEAT}
+            scale={1.4}
           />
         </BoardCanvas>
       </div>
+
+      <div className="board3d-legend">
+        <span>
+          <i style={{ background: COLORS[you] }} />
+          You
+        </span>
+        <span>
+          <i style={{ background: COLORS[1 - you] }} />
+          Them
+        </span>
+        <em>{game.dice ? `Dice ${game.dice}` : "Dice —"}</em>
+      </div>
+
       <p className="uno-log">{game.last?.text}</p>
       <button
         type="button"
@@ -113,7 +135,7 @@ export default function Ludo({ game, you, onAction }: Props) {
           onAction({ type: "roll" });
         }}
       >
-        Roll dice
+        {game.phase === "move" && yourTurn ? "Tap a glowing token" : "Roll dice"}
       </button>
     </div>
   );

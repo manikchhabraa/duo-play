@@ -1,103 +1,101 @@
-import { useEffect, useMemo, useRef } from "react";
+import { useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
-import type { Group } from "three";
+import { Quaternion, Vector3, type Group } from "three";
+import { RoundedBoxGeometry } from "three/examples/jsm/geometries/RoundedBoxGeometry.js";
 
-const FACE: Record<number, [number, number, number]> = {
-  1: [0, 0, 0],
-  2: [0, 0, -Math.PI / 2],
-  3: [Math.PI / 2, 0, 0],
-  4: [-Math.PI / 2, 0, 0],
-  5: [0, 0, Math.PI / 2],
-  6: [Math.PI, 0, 0],
+/** Face normals for a standard die: opposite faces sum to seven. */
+const FACE_NORMAL: Record<number, [number, number, number]> = {
+  1: [0, 1, 0],
+  2: [0, 0, 1],
+  3: [1, 0, 0],
+  4: [-1, 0, 0],
+  5: [0, 0, -1],
+  6: [0, -1, 0],
 };
+
+const PIP_GRID: Record<number, [number, number][]> = {
+  1: [[0, 0]],
+  2: [[-1, -1], [1, 1]],
+  3: [[-1, -1], [0, 0], [1, 1]],
+  4: [[-1, -1], [1, -1], [-1, 1], [1, 1]],
+  5: [[-1, -1], [1, -1], [0, 0], [-1, 1], [1, 1]],
+  6: [[-1, -1], [1, -1], [-1, 0], [1, 0], [-1, 1], [1, 1]],
+};
+
+const UP = new Vector3(0, 1, 0);
+const SPREAD = 0.25;
+const SURFACE = 0.47;
+
+type Pip = { key: string; position: [number, number, number] };
+
+function buildPips(): Pip[] {
+  const pips: Pip[] = [];
+  for (const [face, normal] of Object.entries(FACE_NORMAL)) {
+    const n = new Vector3(...normal);
+    const u = new Vector3(0, 1, 0).cross(n);
+    if (u.lengthSq() < 0.001) u.set(1, 0, 0);
+    u.normalize();
+    const v = new Vector3().crossVectors(n, u).normalize();
+    for (const [a, b] of PIP_GRID[Number(face)]) {
+      const point = n
+        .clone()
+        .multiplyScalar(SURFACE)
+        .addScaledVector(u, a * SPREAD)
+        .addScaledVector(v, b * SPREAD);
+      pips.push({ key: `${face}-${a}-${b}`, position: [point.x, point.y, point.z] });
+    }
+  }
+  return pips;
+}
 
 type Props = {
   value: number;
   spinning: boolean;
-  position?: [number, number, number];
+  position: [number, number, number];
+  scale?: number;
 };
 
-export default function DiceMesh({ value, spinning, position = [0, 1.2, 0] }: Props) {
-  const ref = useRef<Group>(null);
-  const target = useMemo(() => FACE[value] || FACE[1], [value]);
+export default function DiceMesh({ value, spinning, position, scale = 1 }: Props) {
+  const group = useRef<Group>(null);
+  const clock = useRef(0);
+  const geometry = useMemo(() => new RoundedBoxGeometry(1, 1, 1, 5, 0.16), []);
+  const pips = useMemo(() => buildPips(), []);
 
-  useEffect(() => {
-    if (!ref.current || spinning) return;
-    ref.current.rotation.set(target[0], target[1], target[2]);
-  }, [target, spinning]);
+  const resting = useMemo(() => {
+    const normal = new Vector3(...(FACE_NORMAL[value] || FACE_NORMAL[1]));
+    const align = new Quaternion().setFromUnitVectors(normal, UP);
+    const yaw = new Quaternion().setFromAxisAngle(UP, 0.24);
+    return yaw.multiply(align);
+  }, [value]);
 
-  useFrame((_, dt) => {
-    const g = ref.current;
-    if (!g) return;
+  useFrame((_, delta) => {
+    const node = group.current;
+    if (!node) return;
+    const dt = Math.min(delta, 0.05);
+
     if (spinning) {
-      g.rotation.x += dt * 14;
-      g.rotation.y += dt * 11;
-      g.rotation.z += dt * 8;
+      clock.current += dt;
+      node.rotateX(dt * 11);
+      node.rotateY(dt * 15);
+      node.rotateZ(dt * 8);
+      node.position.y = position[1] + Math.abs(Math.sin(clock.current * 8)) * 0.55;
       return;
     }
-    g.rotation.x += (target[0] - g.rotation.x) * Math.min(1, dt * 10);
-    g.rotation.y += (target[1] - g.rotation.y) * Math.min(1, dt * 10);
-    g.rotation.z += (target[2] - g.rotation.z) * Math.min(1, dt * 10);
+
+    clock.current = 0;
+    node.quaternion.slerp(resting, Math.min(1, dt * 9));
+    node.position.y += (position[1] - node.position.y) * Math.min(1, dt * 9);
   });
 
   return (
-    <group ref={ref} position={position}>
-      <mesh castShadow>
-        <boxGeometry args={[1, 1, 1]} />
-        <meshStandardMaterial color="#f4f5f7" roughness={0.35} />
+    <group ref={group} position={position} scale={scale}>
+      <mesh geometry={geometry} castShadow receiveShadow>
+        <meshStandardMaterial color="#fbf7ec" roughness={0.28} metalness={0.05} />
       </mesh>
-      <Dots face="1" />
-      <Dots face="2" />
-      <Dots face="3" />
-      <Dots face="4" />
-      <Dots face="5" />
-      <Dots face="6" />
-    </group>
-  );
-}
-
-const DOT = 0.09;
-
-function Dots({ face }: { face: string }) {
-  const pips: [number, number][] =
-    face === "1"
-      ? [[0, 0]]
-      : face === "2"
-        ? [[-0.22, -0.22], [0.22, 0.22]]
-        : face === "3"
-          ? [[-0.22, -0.22], [0, 0], [0.22, 0.22]]
-          : face === "4"
-            ? [[-0.22, -0.22], [0.22, -0.22], [-0.22, 0.22], [0.22, 0.22]]
-            : face === "5"
-              ? [[-0.22, -0.22], [0.22, -0.22], [0, 0], [-0.22, 0.22], [0.22, 0.22]]
-              : [
-                  [-0.22, -0.28],
-                  [0.22, -0.28],
-                  [-0.22, 0],
-                  [0.22, 0],
-                  [-0.22, 0.28],
-                  [0.22, 0.28],
-                ];
-
-  const transform =
-    face === "1"
-      ? { position: [0, 0.52, 0] as [number, number, number], rotation: [-Math.PI / 2, 0, 0] as [number, number, number] }
-      : face === "6"
-        ? { position: [0, -0.52, 0] as [number, number, number], rotation: [Math.PI / 2, 0, 0] as [number, number, number] }
-        : face === "2"
-          ? { position: [0.52, 0, 0] as [number, number, number], rotation: [0, Math.PI / 2, 0] as [number, number, number] }
-          : face === "5"
-            ? { position: [-0.52, 0, 0] as [number, number, number], rotation: [0, -Math.PI / 2, 0] as [number, number, number] }
-            : face === "3"
-              ? { position: [0, 0, 0.52] as [number, number, number], rotation: [0, 0, 0] as [number, number, number] }
-              : { position: [0, 0, -0.52] as [number, number, number], rotation: [0, Math.PI, 0] as [number, number, number] };
-
-  return (
-    <group position={transform.position} rotation={transform.rotation}>
-      {pips.map((pip, i) => (
-        <mesh key={i} position={[pip[0], pip[1], 0.01]}>
-          <circleGeometry args={[DOT, 12]} />
-          <meshStandardMaterial color="#111" />
+      {pips.map((pip) => (
+        <mesh key={pip.key} position={pip.position}>
+          <sphereGeometry args={[0.075, 14, 14]} />
+          <meshStandardMaterial color="#1b1a19" roughness={0.35} />
         </mesh>
       ))}
     </group>

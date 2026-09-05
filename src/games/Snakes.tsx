@@ -1,8 +1,10 @@
-import { useEffect, useMemo, useState } from "react";
-import { SNAKES, LADDERS, tileRC, SIZE } from "../shared/snakesBoard.js";
+import { useEffect, useState } from "react";
+import { tileRC } from "../shared/snakesBoard.js";
 import { buzz } from "../util";
 import BoardCanvas from "../games3d/BoardCanvas";
 import DiceMesh from "../games3d/DiceMesh";
+import Pawn from "../games3d/Pieces";
+import { SNAKES_FIT, SnakesBoardMesh, tileWorld } from "../games3d/SnakesBoard";
 
 type Anim = {
   player: number;
@@ -26,12 +28,11 @@ type Props = {
   onAction: (action: Record<string, unknown>) => void;
 };
 
-const P0 = "#e23d3d";
-const P1 = "#3de7ff";
+const PAINT = ["#e2453f", "#31c3e8"];
 
-function world(r: number, c: number): [number, number, number] {
-  return [c - (SIZE - 1) / 2, 0.28, r - (SIZE - 1) / 2];
-}
+/** The dice rests on the board frame, clear of all 100 tiles. */
+const DICE_SEAT: [number, number, number] = [5.3, 0.63, 5.3];
+const DICE_HEADROOM: [number, number, number][] = [[6.05, 1.7, 6.05]];
 
 export default function Snakes({ game, you, onAction }: Props) {
   const [spinning, setSpinning] = useState(false);
@@ -63,28 +64,48 @@ export default function Snakes({ game, you, onAction }: Props) {
         cur.map((t) => (t.player === anim.player ? { ...t, n, r: rc.r, c: rc.c } : t))
       );
       i += 1;
-    }, 95);
+    }, 120);
     return () => window.clearInterval(timer);
   }, [game.seq, game.anim, game.tokens]);
 
   return (
     <div className="board3d">
       <div className="board3d-stage">
-        <BoardCanvas camera={[0, 13, 12]}>
-          <SnakesTiles />
+        <BoardCanvas fit={SNAKES_FIT} tilt={1.04} keepInView={DICE_HEADROOM}>
+          <SnakesBoardMesh />
           {display.map((t) => {
-            const [x, y, z] = world(t.r, t.c);
-            const bump = t.player === 0 ? -0.12 : 0.12;
+            const [x, y, z] = tileWorld(t.r, t.c);
+            const lane = t.player === 0 ? -0.18 : 0.18;
             return (
-              <mesh key={t.player} position={[x + bump, y, z]} castShadow>
-                <sphereGeometry args={[0.28, 18, 18]} />
-                <meshStandardMaterial color={t.player === 0 ? P0 : P1} roughness={0.35} />
-              </mesh>
+              <Pawn
+                key={t.player}
+                color={PAINT[t.player]}
+                position={[x + lane, y, z]}
+                scale={0.92}
+              />
             );
           })}
-          <DiceMesh value={game.dice || 1} spinning={spinning} position={[0, 1.4, 0]} />
+          <DiceMesh
+            value={game.dice || 1}
+            spinning={spinning}
+            position={DICE_SEAT}
+            scale={1.1}
+          />
         </BoardCanvas>
       </div>
+
+      <div className="board3d-legend">
+        <span>
+          <i style={{ background: PAINT[you] }} />
+          You · {game.tokens.find((t) => t.player === you)?.n ?? 0}
+        </span>
+        <span>
+          <i style={{ background: PAINT[1 - you] }} />
+          Them · {game.tokens.find((t) => t.player !== you)?.n ?? 0}
+        </span>
+        <em>{game.dice ? `Dice ${game.dice}` : "Dice —"}</em>
+      </div>
+
       <p className="uno-log">{game.last?.text}</p>
       <button
         type="button"
@@ -99,75 +120,5 @@ export default function Snakes({ game, you, onAction }: Props) {
         Roll dice
       </button>
     </div>
-  );
-}
-
-function SnakesTiles() {
-  const tiles = useMemo(() => {
-    const list = [];
-    for (let n = 1; n <= 100; n += 1) {
-      const { r, c } = tileRC(n);
-      const light = (r + c) % 2 === 0;
-      list.push({ n, r, c, color: light ? "#efe6d4" : "#c9b48a" });
-    }
-    return list;
-  }, []);
-
-  const ladders = Object.entries(LADDERS).map(([a, b]) => ({
-    from: tileRC(Number(a)),
-    to: tileRC(Number(b)),
-  }));
-  const snakes = Object.entries(SNAKES).map(([a, b]) => ({
-    from: tileRC(Number(a)),
-    to: tileRC(Number(b)),
-  }));
-
-  return (
-    <group>
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.08, 0]}>
-        <planeGeometry args={[12, 12]} />
-        <meshStandardMaterial color="#102018" />
-      </mesh>
-      {tiles.map((t) => (
-        <mesh
-          key={t.n}
-          position={[t.c - 4.5, 0, t.r - 4.5]}
-          rotation={[-Math.PI / 2, 0, 0]}
-        >
-          <planeGeometry args={[0.92, 0.92]} />
-          <meshStandardMaterial color={t.n === 100 ? "#c8f542" : t.color} />
-        </mesh>
-      ))}
-      {ladders.map((l, i) => (
-        <Rail key={`l${i}`} from={l.from} to={l.to} color="#8b5a2b" />
-      ))}
-      {snakes.map((s, i) => (
-        <Rail key={`s${i}`} from={s.from} to={s.to} color="#1f9d58" />
-      ))}
-    </group>
-  );
-}
-
-function Rail({
-  from,
-  to,
-  color,
-}: {
-  from: { r: number; c: number };
-  to: { r: number; c: number };
-  color: string;
-}) {
-  const a = world(from.r, from.c);
-  const b = world(to.r, to.c);
-  const mid: [number, number, number] = [(a[0] + b[0]) / 2, 0.22, (a[2] + b[2]) / 2];
-  const dx = b[0] - a[0];
-  const dz = b[2] - a[2];
-  const len = Math.hypot(dx, dz) || 0.2;
-  const rot = Math.atan2(dx, dz);
-  return (
-    <mesh position={mid} rotation={[0, rot, 0.18]}>
-      <boxGeometry args={[0.12, 0.08, len]} />
-      <meshStandardMaterial color={color} />
-    </mesh>
   );
 }
